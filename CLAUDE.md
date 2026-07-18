@@ -47,6 +47,7 @@ All gear manuals live in `manuals/`:
 
 - `manuals/Digitone-2-User-Manual_ENG_OS1.10D_251022.pdf`
 - `manuals/minilogue_OM_E5.pdf` — Korg Minilogue owner's manual
+- `manuals/TD-3_Manual.pdf` — Behringer TD-3 quick start guide (the "TB-303")
 
 Will also asks for advice on new gear purchases — frame suggestions around his rig
 and laptop-free live performance goal.
