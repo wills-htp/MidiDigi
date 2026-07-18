@@ -1,6 +1,15 @@
 # MidiDigi — Will's Studio Notebook
 
-This project is Will's studio notebook AND the Reason → Digitone 2 MIDI bridge app.
+This project is Will's studio notebook. Three main uses:
+
+1. **The MidiDigi bridge app** — Reason → Digitone 2 MIDI recording (see below)
+2. **Sound design** — e.g. "I want to make a sub bass with the Tetra." Answer using
+   the gear's actual manual in `manuals/` for parameter names and menus, with
+   concrete settings to try. Aim for his minimal/deep techno sound.
+3. **Gear acquisition** — research and buying advice, e.g. "a compressor for the
+   ZED-10 that works on all channels with a warm analog feel." Ground advice in
+   his existing rig, signal flow (below), vinyl-techno aesthetic, and laptop-free
+   live goal.
 Will is a techno musician and live performer — not a developer. Keep answers practical,
 brief, and music-focused.
 
