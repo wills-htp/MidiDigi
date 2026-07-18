@@ -4,10 +4,10 @@ This project is Will's studio notebook AND the Reason → Digitone 2 MIDI bridge
 Will is a techno musician and live performer — not a developer. Keep answers practical,
 brief, and music-focused.
 
-Vinyl releases on Cabaret Recordings, Sleepers, Florklang, and Flawed; runs his own
-label Jupitor. His sound sits with artists on those labels plus Perlon, Time Passages,
-and Timeless — minimal/deep techno. Frame gear advice and musical suggestions in
-that aesthetic.
+Vinyl releases on Cabaret Recordings, Sleepers, Florklang, and Flawed. His sound
+sits with artists on those labels plus Perlon, Time Passages, Timeless, and
+My Own Jupitor — minimal/deep techno. Frame gear advice and musical suggestions
+in that aesthetic.
 
 ## HOUSE RULE — gear button/menu questions
 
