@@ -19,6 +19,17 @@ If the manual for a piece of gear isn't in `manuals/`, say so instead of guessin
 - Hardware: TB-303, TR-8S, Korg Volca, Minilogue, Arturia Drumbrute, Tetr4
 - Goal: fully laptop-free live sets — transfer humanized Reason sequences into the Digitone 2
 
+## Studio signal flow
+
+**MIDI (USB from Reason 12):** MIDI keyboard, TD-3, Digitone 2, Tetra, Minilogue,
+TR-8S, Volca Bass — all connected to the computer via USB.
+
+**Audio:**
+- Tetra audio → Digitone 2 audio input (mixed inside the Digitone) → Digitone 2 out → mixer
+- Main mixer: Allen & Heath ZED-10
+- Into the ZED-10 directly: computer output, TD-3, Minilogue, TR-8S
+- Zoom V3 on the ZED-10 FX send/return for effects
+
 ## Safety rules
 
 - NEVER risk disrupting the existing working Reason ↔ hardware MIDI connections.
@@ -49,6 +60,8 @@ All gear manuals live in `manuals/`:
 - `manuals/minilogue_OM_E5.pdf` — Korg Minilogue owner's manual
 - `manuals/TD-3_Manual.pdf` — Behringer TD-3 quick start guide (the "TB-303")
 - `manuals/Tetra_Manual_v1.3.pdf` — Dave Smith Instruments Tetra (Tetr4) operation manual
+- `manuals/TR-8S_Manual.pdf` — Roland TR-8S owner's manual
+- `manuals/volca_bass_OM.pdf` — Korg Volca Bass owner's manual (multi-language fold-out, 2 large pages)
 
 Will also asks for advice on new gear purchases — frame suggestions around his rig
 and laptop-free live performance goal.
