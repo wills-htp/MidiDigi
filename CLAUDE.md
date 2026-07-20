@@ -76,6 +76,11 @@ All gear manuals live in `manuals/`:
 - `manuals/Tetra_Manual_v1.3.pdf` — Dave Smith Instruments Tetra (Tetr4) operation manual
 - `manuals/TR-8S_Manual.pdf` — Roland TR-8S owner's manual
 - `manuals/volca_bass_OM.pdf` — Korg Volca Bass owner's manual (multi-language fold-out, 2 large pages)
+- `manuals/DL241_operators_manual.pdf` — Drawmer DL241 dual auto compressor/limiter
 
-Will also asks for advice on new gear purchases — frame suggestions around his rig
-and laptop-free live performance goal.
+## Gear acquisition
+
+- `gear_wishlist.html` — gear acquisition page (open in Chrome to view)
+- Will is building a 6U rack (22"W × 14"D × 14"H) for studio + dawless live use
+- All sound sources must respond to MIDI so the Digitone 2 can sequence them live
+- Frame gear suggestions around his rig, signal flow, and laptop-free live goal
