@@ -77,6 +77,9 @@ All gear manuals live in `manuals/`:
 - `manuals/TR-8S_Manual.pdf` — Roland TR-8S owner's manual
 - `manuals/volca_bass_OM.pdf` — Korg Volca Bass owner's manual (multi-language fold-out, 2 large pages)
 - `manuals/DL241_operators_manual.pdf` — Drawmer DL241 dual auto compressor/limiter
+- `manuals/DL251_operators_manual.pdf` — Drawmer DL251 spectral compressor (scanned PDF, text extraction unreliable — use pypdf with care)
+- `manuals/Blackbox_User_Manual_3.0.pdf` — 1010music Blackbox original user manual v3.0 (123 pages)
+- `manuals/Blackbox2_User_Manual.pdf` — 1010music Blackbox 2 user guide v1.0.1 (173 pages, July 2026)
 
 ## Gear acquisition
 

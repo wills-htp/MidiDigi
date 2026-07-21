@@ -156,6 +156,27 @@
     border-style: dashed;
     background: #1e1e1e;
   }
+  .item-top {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .item-img {
+    flex-shrink: 0;
+    width: 180px;
+    height: 110px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 1px solid #333;
+  }
+  .item-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+  }
+  .item-body { flex: 1; min-width: 0; }
   .item-title {
     display: flex;
     justify-content: space-between;
@@ -197,23 +218,6 @@
     margin-top: 4px;
     margin-bottom: 8px;
   }
-  .links {
-    margin-top: 10px;
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-  }
-  .links a {
-    color: #7a9ec2;
-    text-decoration: none;
-    font-size: 13px;
-    border-bottom: 1px solid #3a5068;
-    padding-bottom: 1px;
-  }
-  .links a:hover {
-    color: #a0c4e8;
-    border-color: #a0c4e8;
-  }
   .notes {
     font-size: 13px;
     color: #888;
@@ -230,6 +234,110 @@
     color: #7a8a6a;
     margin-top: 6px;
   }
+
+  /* Purchase options table */
+  .buy-options {
+    margin-top: 12px;
+    border-top: 1px solid #333;
+    padding-top: 10px;
+  }
+  .buy-options h4 {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #777;
+    margin-bottom: 8px;
+  }
+  .buy-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .buy-card {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 4px;
+    padding: 10px 12px;
+    text-decoration: none;
+    display: block;
+    transition: border-color 0.15s;
+  }
+  .buy-card:hover {
+    border-color: #6b8f71;
+  }
+  .buy-source {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #7a9ec2;
+    margin-bottom: 4px;
+  }
+  .buy-price {
+    font-size: 15px;
+    color: #8bc795;
+    font-weight: 600;
+  }
+  .buy-condition {
+    font-size: 11px;
+    color: #777;
+    margin-top: 2px;
+  }
+
+  /* Rack accessories */
+  .accessory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+  }
+  .accessory {
+    background: #242424;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 16px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .accessory-img {
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #1a1a1a;
+    border: 1px solid #333;
+  }
+  .accessory-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  .accessory-info { flex: 1; }
+  .accessory-info h4 {
+    color: #e0e0e0;
+    font-size: 14px;
+    margin-bottom: 4px;
+  }
+  .accessory-info p {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 4px;
+  }
+  .accessory-info .price {
+    color: #8bc795;
+    font-weight: 500;
+    font-size: 13px;
+  }
+  .accessory-info a {
+    color: #7a9ec2;
+    text-decoration: none;
+    font-size: 12px;
+    border-bottom: 1px solid #3a5068;
+  }
+  .accessory-info a:hover {
+    color: #a0c4e8;
+    border-color: #a0c4e8;
+  }
 </style>
 </head>
 <body>
@@ -238,10 +346,502 @@
 <p class="subtitle">Studio + live setup &middot; 6U rack + desktop units &middot; 22"W &times; 14"D &times; 14"H</p>
 
 <!-- ════════════════════════════════════════════════════════════ -->
-<!-- CONTEXT -->
+<!-- RACK SUMMARY -->
 <!-- ════════════════════════════════════════════════════════════ -->
 
-<div class="context">
+<div class="rack-summary">
+  <strong>Rack budget:</strong> 6U total &middot; max depth 14" &middot;
+  <strong>Committed:</strong> 0U &middot;
+  <strong>Planned:</strong> DL241 (1U) + Airbase 99 (1U) + Bus-Comp (1U) + Perfourmer (~2U) = 5U &middot;
+  <strong>Open:</strong> 1U
+  <div class="u-bar">
+    <span class="planned"></span>
+    <span class="planned"></span>
+    <span class="planned"></span>
+    <span class="planned"></span>
+    <span class="planned"></span>
+    <span></span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- COMPRESSOR / LIMITER -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Compressor / Limiter</h2>
+    <span class="rack-size">1U</span>
+  </div>
+
+  <div class="item primary">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://drawmer.com/images/dl241_front.png" alt="Drawmer DL241 front panel">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Drawmer DL241</h3>
+          <span class="badges">
+            <span class="badge first">First Buy</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>Dual auto compressor + zero-attack peak limiter. Stereo linkable. Two independent channels &mdash; run kick on ch1, snare on ch2 in one pass. Soft-knee compression with British VCA warmth.</p>
+        <p class="notes"><span class="label studio">Studio</span> Process drum stems individually through the DL241, let the warmth compound in the final mixdown. Limiter catches peaks that would eat headroom. Print premasters at -6dB.</p>
+        <p class="notes"><span class="label live">Live</span> Insert on the ZED-10 main bus or drum subgroup. Limiter prevents clipping the PA; compressor adds warmth to the live mix.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/p/drawmer-dl241-dual-auto-compressor-with-xlr-connectors" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$250&ndash;400</div>
+          <div class="buy-condition">Used &middot; multiple listings</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=drawmer+dl241" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$300&ndash;730</div>
+          <div class="buy-condition">Used &middot; check active listings</div>
+        </a>
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/DL241XLR--drawmer-dl241xlr" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$1,279</div>
+          <div class="buy-condition">New &middot; special order</div>
+        </a>
+        <a class="buy-card" href="https://www.drawmer.com/products/pro-series/dl241.php" target="_blank">
+          <div class="buy-source">Drawmer</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Official product page</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item alt">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://drawmer.com/images/dl241_front.png" alt="Drawmer DL251 front panel" style="filter: sepia(0.2) brightness(0.95);">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Drawmer DL251</h3>
+          <span class="badges"><span class="badge alt">Alternative</span></span>
+        </div>
+        <p>Step-up from DL241: adds sidechain filter (stops kicks pumping the compressor on full mixes), sidechain insert for de-essing, and spectral enhancer. XLR I/O. Same soft-knee compression core.</p>
+        <p><span class="price">~$300&ndash;500 used</span></p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/p/drawmer-dl251-2-channel-spectral-compressor" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$300&ndash;500</div>
+          <div class="buy-condition">Used &middot; check price guide</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=drawmer+dl251" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$300&ndash;500</div>
+          <div class="buy-condition">Used &middot; check active listings</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item alt">
+    <div class="item-top">
+      <div class="item-img" style="background: #222;">
+        <img src="https://www.avgear.com/cdn/shop/files/P1840089_1024x1024@2x.jpg" alt="Aphex Dominator II 720">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Aphex Dominator II 720</h3>
+          <span class="badges"><span class="badge alt">Alternative</span></span>
+        </div>
+        <p>Multiband stereo peak limiter &mdash; absolute ceiling with zero overshoot, no audible clipping. Multiband means a kick spike doesn't duck the hats. Broadcast legend.</p>
+        <p class="notes">Pure limiter, no compression &mdash; more surgical than the DL241 but no warmth. Could pair with the Bus-Comp for best of both worlds.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/marketplace?query=aphex%20dominator%20720" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$150&ndash;350</div>
+          <div class="buy-condition">Used &middot; discontinued</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=aphex+dominator+720" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$150&ndash;350</div>
+          <div class="buy-condition">Used &middot; discontinued</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- DRUM MACHINE -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Drum Machine</h2>
+    <span class="rack-size">1U</span>
+  </div>
+
+  <div class="item wishlist">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://www.vintagesynth.com/sites/default/files/styles/750x435sc/public/2017-05/airbase99.jpg?itok=drRsefPi" alt="Jomox Airbase 99">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Jomox Airbase 99</h3>
+          <span class="badges">
+            <span class="badge later">Later</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>Analog rack drum synth &mdash; 9 voices inspired by 808, 909, and CR-78 circuits. Deep sound design per voice. 1U rackmount. Pure analog kick and percussion for minimal/deep techno.</p>
+        <p class="notes">Already researched &mdash; love it, not buying right now.</p>
+        <p class="midi-note">MIDI: responds to note messages for triggering + CC for sound design. Sequenced by Reason (studio) or Digitone 2 (live) &mdash; assign a free MIDI channel in CHANNEL_MAP.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/marketplace?query=jomox%20airbase%2099" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$600&ndash;900</div>
+          <div class="buy-condition">Used &middot; discontinued &middot; rare</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=jomox+airbase+99" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$600&ndash;900</div>
+          <div class="buy-condition">Used &middot; discontinued</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- DISTORTION / WARMER -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Distortion / Warmer</h2>
+    <span class="rack-size">1U</span>
+  </div>
+
+  <div class="item wishlist">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://images.ctfassets.net/h4x5uvaoia7v/6ijtYe5zyw9S7DGVd3Tq6u/f575aea2da6e1f3fc4620ef03ba72f5b/buscomp-product.png" alt="Warm Audio Bus-Comp">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Warm Audio Bus-Comp</h3>
+          <span class="badges">
+            <span class="badge later">Later</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>Stereo VCA bus compressor (SSL 4000 G-style). Switchable CineMag transformers add real analog warmth and harmonic saturation. THAT VCAs for glue. The "color" box &mdash; run stems through it for tone, not dynamics.</p>
+        <p class="notes"><span class="label studio">Studio</span> Run stems through for warmth before the DL241 limits. Compound the saturation across multiple stems.</p>
+        <p class="notes"><span class="label live">Live</span> Insert on ZED-10 main bus for analog warmth on the full live mix.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/WABusComp--warm-audio-bus-comp-2-channel-stereo-vca-bus-compressor" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$799</div>
+          <div class="buy-condition">New &middot; in stock</div>
+        </a>
+        <a class="buy-card" href="https://reverb.com/p/warm-audio-bus-comp-2-channel-vca-bus-compressor" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$440&ndash;620</div>
+          <div class="buy-condition">Used</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=warm+audio+bus+comp" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$440&ndash;720</div>
+          <div class="buy-condition">Used / refurbished</div>
+        </a>
+        <a class="buy-card" href="https://warmaudio.com/bus-comp/" target="_blank">
+          <div class="buy-source">Warm Audio</div>
+          <div class="buy-price">$799</div>
+          <div class="buy-condition">Official &middot; MSRP $699</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- SAMPLER -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Sampler</h2>
+    <span class="rack-size">Desktop</span>
+  </div>
+
+  <div class="item primary">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://1010music.com/wp-content/uploads/2026/05/1010Music_BlackBox2_01.jpg" alt="1010music Blackbox 2">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>1010music Blackbox 2</h3>
+          <span class="badges">
+            <span class="badge first">Confirmed</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>Compact sampling workstation &mdash; 4 tracks, each a different instrument type: Slicer (up to 128 slices, auto-scan or manual), One-Shot (16 pads with per-pad pitch/filter/envelope/reverse), Loop, Multisample, Shredder (granular), or External MIDI. 4" touchscreen, 4 knobs, battery-powered (4 hrs).</p>
+        <p class="notes"><span class="label studio">Studio</span> Load WAVs via USB-C (microSD Mode &mdash; card appears as removable disk on Mac, drag and drop). Streams samples up to 4GB from microSD. Slicer auto-detects transients; One-Shot mode gives per-pad control of pitch, level, filter, decay, reverse.</p>
+        <p class="notes"><span class="label live">Live</span> Digitone 2 sequences slices via TRS MIDI (C2 = slice 1, chromatic upward). Battery-powered, no laptop. Per-track overdrive, master delay (beat-synced), reverb (with freeze), DJ FX (bitcrusher, flanger, filter, gater, repeater), 4-band parametric EQ, compressor.</p>
+        <p class="midi-note">MIDI: TRS MIDI In (auto-detects Type A/B) + TRS MIDI Out + USB-C MIDI. Per-track MIDI channel. Assign a free MIDI channel in CHANNEL_MAP. Also does TRS clock sync.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://1010music.com/product/blackbox-2" target="_blank">
+          <div class="buy-source">1010music</div>
+          <div class="buy-price">$649</div>
+          <div class="buy-condition">New &middot; shipping July 2026</div>
+        </a>
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/BlackBoxSt2--1010music-blackbox-2-compact-sampling-studio" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$649</div>
+          <div class="buy-condition">New</div>
+        </a>
+        <a class="buy-card" href="https://www.perfectcircuit.com/1010-music-blackbox-2.html" target="_blank">
+          <div class="buy-source">Perfect Circuit</div>
+          <div class="buy-price">$649</div>
+          <div class="buy-condition">New</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- ANALOG SYNTH -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Analog Synth</h2>
+    <span class="rack-size">Rack</span>
+  </div>
+
+  <div class="item primary">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://www.vermona.com/fileadmin/_processed_/b/0/csm_p4m2_top_front_62755e01b2.jpg" alt="Vermona Perfourmer MKII">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Vermona Perfourmer MKII</h3>
+          <span class="badges">
+            <span class="badge first">Primary Pick</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>Four independent analog mono synths in one unit &mdash; use as 4 monos, 2 duophonic, or 1 four-voice poly. Each voice: 1 oscillator (5 waveforms) + noise, 24dB low-pass filter, LFO, full ADSR. Desktop with optional 19" rack ears (~2U, 12.4" deep &mdash; fits the rack).</p>
+        <p class="notes"><span class="label studio">Studio</span> Reason sequences all 4 voices on separate MIDI channels for bass, lead, pad, and texture layers in one box.</p>
+        <p class="notes"><span class="label live">Live</span> Digitone 2 sequences up to 4 independent mono lines from a single rack unit &mdash; maximum flexibility from minimum gear. The live killer feature.</p>
+        <p class="midi-note">MIDI: MIDI In/Out/Thru (5-pin DIN). Each voice assignable to its own MIDI channel. 4 channels in CHANNEL_MAP for one box. CV/Gate version also available.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/p/vermona-perfourmer-mkii" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$1,150&ndash;1,600</div>
+          <div class="buy-condition">Used &middot; limited availability</div>
+        </a>
+        <a class="buy-card" href="https://www.perfectcircuit.com/vermona-perfourmer-mkii.html" target="_blank">
+          <div class="buy-source">Perfect Circuit</div>
+          <div class="buy-price">~$1,600</div>
+          <div class="buy-condition">New</div>
+        </a>
+        <a class="buy-card" href="https://www.vermona.com/en/products/synthesizer/product/perfourmer-mkii/" target="_blank">
+          <div class="buy-source">Vermona</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Official product page</div>
+        </a>
+        <a class="buy-card" href="https://www.thomannmusic.com/vermona_perfourmer_mkii_rack_ears.htm" target="_blank">
+          <div class="buy-source">Thomann</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Rack ears accessory</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item alt">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://studioelectronics.com/products/rackmount/SE-3X/Media/SE3X-Bk-800.png" alt="Studio Electronics SE-3X">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Studio Electronics SE-3X</h3>
+          <span class="badges"><span class="badge alt">Alternative</span></span>
+        </div>
+        <p>3-voice paraphonic, 3 oscillators, <strong>4 discrete classic filters</strong> (Moog / ARP / Oberheim / Roland &mdash; switchable). The most Thor-like analog rack synth: multiple filter characters in one box. 3U rack, MIDI, patch memory.</p>
+        <p class="notes">Incredible sound design range from the 4 filter types, but 3U eats half the rack and it's paraphonic (shared filter/amp), not truly polyphonic.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/SE3X--studio-electronics-se-3x-limited-analog-synthesizer" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$2,199</div>
+          <div class="buy-condition">New</div>
+        </a>
+        <a class="buy-card" href="https://reverb.com/marketplace?query=studio%20electronics%20se-3x" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$1,500+</div>
+          <div class="buy-condition">New / used</div>
+        </a>
+        <a class="buy-card" href="https://www.studioelectronics.com/products/rackmount/SE-3X/" target="_blank">
+          <div class="buy-source">Studio Electronics</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Official product page</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item alt">
+    <div class="item-top">
+      <div class="item-img">
+        <img src="https://studioelectronics.com/media/product/synths/980/SE-1X-19.jpg" alt="Studio Electronics SE-1X">
+      </div>
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Studio Electronics SE-1X</h3>
+          <span class="badges"><span class="badge alt">Alternative</span></span>
+        </div>
+        <p>The deep-techno mono rack synth. 3 analog oscillators, Moog-style signal path, 396 patch memory. 3U rack, 8" deep. Fat bass and leads &mdash; the benchmark for minimal techno bass.</p>
+        <p class="notes">Legendary sound but mono only and 3U. Best if you want one massive bass/lead voice rather than multi-voice flexibility.</p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://reverb.com/p/studio-electronics-se-1x" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$800&ndash;1,200</div>
+          <div class="buy-condition">Used</div>
+        </a>
+        <a class="buy-card" href="https://www.ebay.com/sch/i.html?_nkw=studio+electronics+se-1x" target="_blank">
+          <div class="buy-source">eBay</div>
+          <div class="buy-price">~$800&ndash;1,200</div>
+          <div class="buy-condition">Used</div>
+        </a>
+        <a class="buy-card" href="https://www.studioelectronics.com/products/synths/se-1x/" target="_blank">
+          <div class="buy-source">Studio Electronics</div>
+          <div class="buy-price">~$1,548</div>
+          <div class="buy-condition">New</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- RACK & ACCESSORIES -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>Rack &amp; Accessories</h2>
+    <span class="rack-size">Required</span>
+  </div>
+
+  <div class="accessory-grid">
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>JINGCHENGMEI 6U Desktop Rack</h4>
+        <p>Open-frame 2-post tabletop rack. 19.8"W &times; 11.6"D &times; 12.9"H &mdash; fits the 22&times;14&times;14 space. Adjustable angle (9&ndash;24&deg;). Includes M6 screws + cage nuts.</p>
+        <p class="price">~$40&ndash;50</p>
+        <a href="https://www.amazon.com/JINGCHENGMEI-Free-Standing-Tabletop-Computer-Equipment/dp/B0DLWFSYFW" target="_blank">Amazon</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>Sound Town 2PF-6A (Aluminum) &mdash; Refurbished</h4>
+        <p>6U aluminum 2-post open-frame desktop rack. Angle adjustable (65/75/85&deg;), folds flat for storage. 200 lb capacity. Lightweight. Refurb: tested &amp; functional, cosmetic dents possible, 180-day warranty.</p>
+        <p class="price">$89.99</p>
+        <a href="https://www.soundtown.com/products/2pf-6a-r" target="_blank">Sound Town (Refurbished)</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>Sound Town STBR-6U (Bamboo)</h4>
+        <p>6U solid bamboo studio rack. 14.2" depth &mdash; tight fit in 14"D space but looks great. Ventilated sides. Disassembles for transport.</p>
+        <p class="price">~$60&ndash;80</p>
+        <a href="https://www.soundtown.com/products/stbr-6u" target="_blank">Sound Town</a> &middot;
+        <a href="https://www.amazon.com/Sound-Town-Carbonized-Equipment-Ventilation/dp/B0CCY35SRR" target="_blank">Amazon</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>1U Vented Rack Shelf</h4>
+        <p>For mounting the Blackbox 2 or other desktop units in the rack. Perforated steel, 35 lb capacity. Uses 1U of rack space.</p>
+        <p class="price">~$30&ndash;40</p>
+        <a href="https://www.sweetwater.com/store/detail/RVS1000--on-stage-vented-rack-shelf-1u" target="_blank">Sweetwater (On-Stage)</a> &middot;
+        <a href="https://www.amazon.com/Pyle-Circulation-Cantilever-Universal-PLRSTN14U/dp/B01HTG4WHY" target="_blank">Amazon (Pyle)</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>1U Blank Rack Panel</h4>
+        <p>Cover empty rack slots. Keeps dust out and looks clean. Get 1&ndash;2 to fill unused U space.</p>
+        <p class="price">~$8&ndash;15</p>
+        <a href="https://www.amazon.com/NavePoint-19-Inch-Network-Enclosure-Cabinet/dp/B00BTRD1FE" target="_blank">Amazon (NavePoint)</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>Vermona Rack Ears</h4>
+        <p>Optional 19" rack ears for the Perfourmer MKII. Required if mounting it in the rack case.</p>
+        <p class="price">~$30&ndash;50</p>
+        <a href="https://www.thomannmusic.com/vermona_perfourmer_mkii_rack_ears.htm" target="_blank">Thomann</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
+        <h4>Rack Screws + Cage Nuts</h4>
+        <p>M6 rack screws with cage nuts and washers. Get a bag of 20&ndash;50. Some rack cases include hardware.</p>
+        <p class="price">~$10&ndash;15</p>
+        <a href="https://www.amazon.com/s?k=rack+screws+cage+nuts+M6" target="_blank">Amazon</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- THE SETUP (moved to bottom) -->
+<!-- ════════════════════════════════════════════════════════════ -->
+
+<div class="context" style="margin-top: 36px;">
   <h2>The setup</h2>
 
   <p><strong>Two modes, one rig.</strong> Everything acquired here serves both the studio and a fully laptop-free live/jamming setup. Gear must work in both worlds.</p>
@@ -275,242 +875,6 @@
   </ul>
 
   <p style="margin-top: 12px;"><strong>Sound:</strong> minimal/deep techno. Labels: Cabaret Recordings, Sleepers, Florklang, Flawed. Adjacent: Perlon, Time Passages, Timeless, My Own Jupitor.</p>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- RACK SUMMARY -->
-<!-- ════════════════════════════════════════════════════════════ -->
-
-<div class="rack-summary">
-  <strong>Rack budget:</strong> 6U total &middot; max depth 14" &middot;
-  <strong>Committed:</strong> 0U &middot;
-  <strong>Planned:</strong> DL241 (1U) + Airbase 99 (1U) + Bus-Comp (1U) + Perfourmer (~2U) = 5U &middot;
-  <strong>Open:</strong> 1U
-  <div class="u-bar">
-    <span class="planned"></span>
-    <span class="planned"></span>
-    <span class="planned"></span>
-    <span class="planned"></span>
-    <span class="planned"></span>
-    <span></span>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- COMPRESSOR / LIMITER -->
-<!-- ════════════════════════════════════════════════════════════ -->
-<div class="category">
-  <div class="category-header">
-    <h2>Compressor / Limiter</h2>
-    <span class="rack-size">1U</span>
-  </div>
-
-  <div class="item primary">
-    <div class="item-title">
-      <h3>Drawmer DL241</h3>
-      <span class="badges">
-        <span class="badge first">First Buy</span>
-        <span class="label both">Studio + Live</span>
-      </span>
-    </div>
-    <p>Dual auto compressor + zero-attack peak limiter. Stereo linkable. Two independent channels &mdash; run kick on ch1, snare on ch2 in one pass. Soft-knee compression with British VCA warmth.</p>
-    <p><span class="price">~$250&ndash;400 used</span> &middot; $1,279 new (Sweetwater special order)</p>
-    <p class="notes"><span class="label studio">Studio</span> Process drum stems individually through the DL241, let the warmth compound in the final mixdown. Limiter catches peaks that would eat headroom. Print premasters at -6dB.</p>
-    <p class="notes"><span class="label live">Live</span> Insert on the ZED-10 main bus or drum subgroup. Limiter prevents clipping the PA; compressor adds warmth to the live mix.</p>
-    <div class="links">
-      <a href="https://reverb.com/p/drawmer-dl241-dual-auto-compressor-with-xlr-connectors" target="_blank">Reverb</a>
-      <a href="https://www.sweetwater.com/store/detail/DL241XLR--drawmer-dl241xlr" target="_blank">Sweetwater</a>
-      <a href="https://www.ebay.com/sch/i.html?_nkw=drawmer+dl241" target="_blank">eBay</a>
-      <a href="https://www.drawmer.com/products/pro-series/dl241.php" target="_blank">Drawmer (official)</a>
-    </div>
-  </div>
-
-  <div class="item alt">
-    <div class="item-title">
-      <h3>Aphex Dominator II 720</h3>
-      <span class="badges"><span class="badge alt">Alternative</span></span>
-    </div>
-    <p>Multiband stereo peak limiter &mdash; absolute ceiling with zero overshoot, no audible clipping. Multiband means a kick spike doesn't duck the hats. Broadcast legend.</p>
-    <p><span class="price">~$150&ndash;350 used</span> &middot; discontinued</p>
-    <p class="notes">Pure limiter, no compression &mdash; more surgical than the DL241 but no warmth. Could pair with the Bus-Comp for best of both worlds.</p>
-    <div class="links">
-      <a href="https://reverb.com/marketplace?query=aphex%20dominator%20720" target="_blank">Reverb</a>
-      <a href="https://www.ebay.com/b/Aphex-Dominator/23791/bn_7023324994" target="_blank">eBay</a>
-    </div>
-  </div>
-
-  <div class="item alt">
-    <div class="item-title">
-      <h3>Drawmer DL251</h3>
-      <span class="badges"><span class="badge alt">Alternative</span></span>
-    </div>
-    <p>Same as DL241 but with XLR I/O and a sidechain input for frequency-conscious compression. Slightly more flexible, otherwise identical.</p>
-    <p><span class="price">~$300&ndash;500 used</span></p>
-    <div class="links">
-      <a href="https://reverb.com/marketplace?query=drawmer%20dl251" target="_blank">Reverb</a>
-      <a href="https://www.ebay.com/sch/i.html?_nkw=drawmer+dl251" target="_blank">eBay</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- DRUM MACHINE -->
-<!-- ════════════════════════════════════════════════════════════ -->
-<div class="category">
-  <div class="category-header">
-    <h2>Drum Machine</h2>
-    <span class="rack-size">1U</span>
-  </div>
-
-  <div class="item wishlist">
-    <div class="item-title">
-      <h3>Jomox Airbase 99</h3>
-      <span class="badges">
-        <span class="badge later">Later</span>
-        <span class="label both">Studio + Live</span>
-      </span>
-    </div>
-    <p>Analog rack drum synth &mdash; 9 voices inspired by 808, 909, and CR-78 circuits. Deep sound design per voice. 1U rackmount. Pure analog kick and percussion for minimal/deep techno.</p>
-    <p><span class="price">~$600&ndash;900 used</span> &middot; discontinued</p>
-    <p class="notes">Already researched &mdash; love it, not buying right now.</p>
-    <p class="midi-note">MIDI: responds to note messages for triggering + CC for sound design. Sequenced by Reason (studio) or Digitone 2 (live) &mdash; assign a free MIDI channel in CHANNEL_MAP.</p>
-    <div class="links">
-      <a href="https://reverb.com/marketplace?query=jomox%20airbase%2099" target="_blank">Reverb</a>
-      <a href="https://www.ebay.com/sch/i.html?_nkw=jomox+airbase+99" target="_blank">eBay</a>
-      <a href="https://www.vintagesynth.com/jomox/airbase-99" target="_blank">Vintage Synth Explorer</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- DISTORTION / WARMER -->
-<!-- ════════════════════════════════════════════════════════════ -->
-<div class="category">
-  <div class="category-header">
-    <h2>Distortion / Warmer</h2>
-    <span class="rack-size">1U</span>
-  </div>
-
-  <div class="item wishlist">
-    <div class="item-title">
-      <h3>Warm Audio Bus-Comp</h3>
-      <span class="badges">
-        <span class="badge later">Later</span>
-        <span class="label both">Studio + Live</span>
-      </span>
-    </div>
-    <p>Stereo VCA bus compressor (SSL 4000 G-style). Switchable CineMag transformers add real analog warmth and harmonic saturation. THAT VCAs for glue. The "color" box &mdash; run stems through it for tone, not dynamics.</p>
-    <p><span class="price">~$500 used</span> &middot; ~$715 new</p>
-    <p class="notes"><span class="label studio">Studio</span> Run stems through for warmth before the DL241 limits. Compound the saturation across multiple stems.</p>
-    <p class="notes"><span class="label live">Live</span> Insert on ZED-10 main bus for analog warmth on the full live mix.</p>
-    <div class="links">
-      <a href="https://www.sweetwater.com/store/detail/WABusComp--warm-audio-bus-comp-2-channel-stereo-vca-bus-compressor" target="_blank">Sweetwater</a>
-      <a href="https://reverb.com/marketplace?query=warm%20audio%20bus%20comp" target="_blank">Reverb</a>
-      <a href="https://warmaudio.com/bus-comp/" target="_blank">Warm Audio (official)</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- SAMPLER -->
-<!-- ════════════════════════════════════════════════════════════ -->
-<div class="category">
-  <div class="category-header">
-    <h2>Sampler</h2>
-    <span class="rack-size">Desktop</span>
-  </div>
-
-  <div class="item wishlist">
-    <div class="item-title">
-      <h3>1010music Blackbox 2</h3>
-      <span class="badges">
-        <span class="badge later">Later</span>
-        <span class="label both">Studio + Live</span>
-      </span>
-    </div>
-    <p>Hardware Dr. Rex &mdash; compact sampling workstation with loop slicing, one-shot, shredder, and multisample engines across 4 tracks. 4" touchscreen + 4 knobs. Streams long samples (up to 4GB) from microSD. Onboard FX per track.</p>
-    <p><span class="price">$649 new</span> &middot; shipping July 2026</p>
-    <p class="notes">Load samples: drag &amp; drop WAVs onto microSD from Mac, or transfer via USB-C. Dead simple. Battery-powered (3hrs) for untethered live use.</p>
-    <p class="midi-note">MIDI: USB-C MIDI + TRS MIDI with included 5-pin DIN adapter. Digitone 2 sequences slices/one-shots dawless. Assign a free MIDI channel in CHANNEL_MAP.</p>
-    <div class="links">
-      <a href="https://1010music.com/product/blackbox-2" target="_blank">1010music (official)</a>
-      <a href="https://www.sweetwater.com/store/detail/BlackBoxSt2--1010music-blackbox-2-compact-sampling-studio" target="_blank">Sweetwater</a>
-      <a href="https://www.perfectcircuit.com/1010-music-blackbox-2.html" target="_blank">Perfect Circuit</a>
-    </div>
-  </div>
-
-  <div class="item alt">
-    <div class="item-title">
-      <h3>1010music Blackbox (original)</h3>
-      <span class="badges"><span class="badge alt">Alternative</span></span>
-    </div>
-    <p>Same slicing/sampling engine, smaller screen, no battery. Proven and well-documented.</p>
-    <p><span class="price">~$350&ndash;450 used</span> &middot; ~$500 new</p>
-    <div class="links">
-      <a href="https://1010music.com/product/blackbox" target="_blank">1010music (official)</a>
-      <a href="https://reverb.com/p/1010-music-blackbox-desktop-compact-sampling-studio" target="_blank">Reverb</a>
-    </div>
-  </div>
-</div>
-
-<!-- ════════════════════════════════════════════════════════════ -->
-<!-- ANALOG SYNTH -->
-<!-- ════════════════════════════════════════════════════════════ -->
-<div class="category">
-  <div class="category-header">
-    <h2>Analog Synth</h2>
-    <span class="rack-size">Rack</span>
-  </div>
-
-  <div class="item primary">
-    <div class="item-title">
-      <h3>Vermona Perfourmer MKII</h3>
-      <span class="badges">
-        <span class="badge first">Primary Pick</span>
-        <span class="label both">Studio + Live</span>
-      </span>
-    </div>
-    <p>Four independent analog mono synths in one unit &mdash; use as 4 monos, 2 duophonic, or 1 four-voice poly. Each voice: 1 oscillator (5 waveforms) + noise, 24dB low-pass filter, LFO, full ADSR. Desktop with optional 19" rack ears (~2U, 12.4" deep &mdash; fits the rack).</p>
-    <p><span class="price">~$900&ndash;1,200 used</span> &middot; ~$1,600 new</p>
-    <p class="notes"><span class="label studio">Studio</span> Reason sequences all 4 voices on separate MIDI channels for bass, lead, pad, and texture layers in one box.</p>
-    <p class="notes"><span class="label live">Live</span> Digitone 2 sequences up to 4 independent mono lines from a single rack unit &mdash; maximum flexibility from minimum gear. The live killer feature.</p>
-    <p class="midi-note">MIDI: MIDI In/Out/Thru (5-pin DIN). Each voice assignable to its own MIDI channel. 4 channels in CHANNEL_MAP for one box. CV/Gate version also available.</p>
-    <div class="links">
-      <a href="https://www.vermona.com/en/products/synthesizer/product/perfourmer-mkii/" target="_blank">Vermona (official)</a>
-      <a href="https://reverb.com/p/vermona-perfourmer-mkii" target="_blank">Reverb</a>
-      <a href="https://www.perfectcircuit.com/vermona-perfourmer-mkii.html" target="_blank">Perfect Circuit</a>
-      <a href="https://www.thomannmusic.com/vermona_perfourmer_mkii_rack_ears.htm" target="_blank">Rack ears (Thomann)</a>
-    </div>
-  </div>
-
-  <div class="item alt">
-    <div class="item-title">
-      <h3>Studio Electronics SE-3X</h3>
-      <span class="badges"><span class="badge alt">Alternative</span></span>
-    </div>
-    <p>3-voice paraphonic, 3 oscillators, <strong>4 discrete classic filters</strong> (Moog / ARP / Oberheim / Roland &mdash; switchable). The most Thor-like analog rack synth: multiple filter characters in one box. 3U rack, MIDI, patch memory.</p>
-    <p><span class="price">~$1,500+ new</span></p>
-    <p class="notes">Incredible sound design range from the 4 filter types, but 3U eats half the rack and it's paraphonic (shared filter/amp), not truly polyphonic.</p>
-    <div class="links">
-      <a href="https://www.studioelectronics.com/products/rackmount/SE-3X/" target="_blank">Studio Electronics (official)</a>
-      <a href="https://reverb.com/marketplace?query=studio%20electronics%20se-3x" target="_blank">Reverb</a>
-    </div>
-  </div>
-
-  <div class="item alt">
-    <div class="item-title">
-      <h3>Studio Electronics SE-1X</h3>
-      <span class="badges"><span class="badge alt">Alternative</span></span>
-    </div>
-    <p>The deep-techno mono rack synth. 3 analog oscillators, Moog-style signal path, 396 patch memory. 3U rack, 8" deep. Fat bass and leads &mdash; the benchmark for minimal techno bass.</p>
-    <p><span class="price">~$800&ndash;1,200 used</span> &middot; ~$1,548 new</p>
-    <p class="notes">Legendary sound but mono only and 3U. Best if you want one massive bass/lead voice rather than multi-voice flexibility.</p>
-    <div class="links">
-      <a href="https://www.studioelectronics.com/products/synths/se-1x/" target="_blank">Studio Electronics (official)</a>
-      <a href="https://reverb.com/p/studio-electronics-se-1x" target="_blank">Reverb</a>
-      <a href="https://www.ebay.com/sch/i.html?_nkw=studio+electronics+se-1x" target="_blank">eBay</a>
-    </div>
-  </div>
 </div>
 
 <!-- ════════════════════════════════════════════════════════════ -->
