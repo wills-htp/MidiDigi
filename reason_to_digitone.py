@@ -67,7 +67,7 @@ CHANNEL_MAP = {
     1: "TB-303 (TD-3)",
     2: "Tetr4",
     3: "Minilogue",
-    9: "TR-8S",
+    10: "TR-8S",
 }
 
 
