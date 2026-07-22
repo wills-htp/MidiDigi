@@ -64,7 +64,9 @@ TR-8S, Volca Bass — all connected to the computer via USB.
 - Phase 3 (not started): song definition file (YAML/JSON), batch recording mode,
   post-recording report
 - Reason setup done: MIDI Clock out on IAC Driver Bus 1, Send Clock enabled.
-  Channel 1 = TR-8S, Channel 10 = Minilogue (NOT ch2 as in default CHANNEL_MAP)
+  Fixed channel convention (each unit already set to receive on these in Reason):
+  ch1 = TB-303 (TD-3), ch2 = Tetr4, ch3 = Minilogue, ch9 = TR-8S.
+  Matches CHANNEL_MAP in reason_to_digitone.py. (Volca/Drumbrute/Blackbox 2 channels TBD.)
 
 ## Manuals
 

@@ -64,14 +64,10 @@ PC_EARLY_PULSES = 12
 # Channel map: for logging/verification only (script passes all channels through)
 # Key = MIDI channel (1-indexed), Value = description
 CHANNEL_MAP = {
-    1: "TR-8S",
-    2: "Minilogue",
-    3: "TB-303",
-    4: "Drumbrute",
-    5: "Tetr4",
-    6: "Volca",
-    7: "—",
-    8: "—",
+    1: "TB-303 (TD-3)",
+    2: "Tetr4",
+    3: "Minilogue",
+    9: "TR-8S",
 }
 
 
