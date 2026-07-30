@@ -352,15 +352,15 @@
 <div class="rack-summary">
   <strong>Rack budget:</strong> 6U total &middot; max depth 14" &middot;
   <strong>Committed:</strong> 0U &middot;
-  <strong>Planned:</strong> DL241 (1U) + Airbase 99 (1U) + Bus-Comp (1U) + Perfourmer (~2U) = 5U &middot;
-  <strong>Open:</strong> 1U
+  <strong>Planned:</strong> DL241 (1U) + Airbase 99 (1U) + Bus-Comp (1U) + Perfourmer (~2U) + mioXL (1U) = 6U &middot;
+  <strong>Open:</strong> 0U (mioXL fills the last 1U)
   <div class="u-bar">
     <span class="planned"></span>
     <span class="planned"></span>
     <span class="planned"></span>
     <span class="planned"></span>
     <span class="planned"></span>
-    <span></span>
+    <span class="planned"></span>
   </div>
 </div>
 
@@ -599,14 +599,14 @@
         <div class="item-title">
           <h3>1010music Blackbox 2</h3>
           <span class="badges">
-            <span class="badge first">Confirmed</span>
+            <span class="badge first">Owned</span>
             <span class="label both">Studio + Live</span>
           </span>
         </div>
         <p>Compact sampling workstation &mdash; 4 tracks, each a different instrument type: Slicer (up to 128 slices, auto-scan or manual), One-Shot (16 pads with per-pad pitch/filter/envelope/reverse), Loop, Multisample, Shredder (granular), or External MIDI. 4" touchscreen, 4 knobs, battery-powered (4 hrs).</p>
         <p class="notes"><span class="label studio">Studio</span> Load WAVs via USB-C (microSD Mode &mdash; card appears as removable disk on Mac, drag and drop). Streams samples up to 4GB from microSD. Slicer auto-detects transients; One-Shot mode gives per-pad control of pitch, level, filter, decay, reverse.</p>
         <p class="notes"><span class="label live">Live</span> Digitone 2 sequences slices via TRS MIDI (C2 = slice 1, chromatic upward). Battery-powered, no laptop. Per-track overdrive, master delay (beat-synced), reverb (with freeze), DJ FX (bitcrusher, flanger, filter, gater, repeater), 4-band parametric EQ, compressor.</p>
-        <p class="midi-note">MIDI: TRS MIDI In (auto-detects Type A/B) + TRS MIDI Out + USB-C MIDI. Per-track MIDI channel. Assign a free MIDI channel in CHANNEL_MAP. Also does TRS clock sync.</p>
+        <p class="midi-note">MIDI: TRS MIDI In (auto-detects Type A/B) + TRS MIDI Out + USB-C MIDI. Per-track MIDI channel. Assign a free MIDI channel in CHANNEL_MAP. Also does TRS clock sync. Needs TRS-to-DIN Type A adapter cables for the dawless MIDI chain.</p>
       </div>
     </div>
     <div class="buy-options">
@@ -626,6 +626,89 @@
           <div class="buy-source">Perfect Circuit</div>
           <div class="buy-price">$649</div>
           <div class="buy-condition">New</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!-- MIDI ROUTER / HUB -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="category">
+  <div class="category-header">
+    <h2>MIDI Router / Hub</h2>
+    <span class="rack-size">1U</span>
+  </div>
+
+  <div class="item primary">
+    <div class="item-top">
+      <div class="item-body">
+        <div class="item-title">
+          <h3>iConnectivity mioXL</h3>
+          <span class="badges">
+            <span class="badge first">Primary Pick</span>
+            <span class="label both">Studio + Live</span>
+          </span>
+        </div>
+        <p>USB MIDI host + interface + router in 1U. <strong>10 USB-A host ports</strong> (4 front, 6 rear) &mdash; every synth in the rig plugs in via USB. Separate USB-B port for the computer. 8 DIN MIDI in + 12 DIN MIDI out. Own power supply (12V/36W). Ethernet for RTP-MIDI.</p>
+        <p class="notes"><span class="label studio">Studio</span> Replaces the 8-port USB multiport. All synths connect to the mioXL via USB; Reason sees everything through one USB-B cable. 10 host ports = room for the whole rig + future gear.</p>
+        <p class="notes"><span class="label live">Live</span> Disconnect the computer &mdash; the mioXL becomes a standalone USB MIDI host. Digitone 2 sends MIDI through the mioXL to all synths over USB. No daisy chain, no thru boxes, no splitters. Save a &ldquo;dawless&rdquo; routing preset; recall it from the front panel.</p>
+        <p class="notes">Routing configured via Auracle software (Mac). Once saved to device (32 presets), runs fully standalone. Front-panel preset recall + MIDI activity monitor.</p>
+        <p class="midi-note">Solves two problems at once: (1) not enough USB ports for the computer, (2) no way to route MIDI from Digitone 2 to all synths without a computer. Manual verified: <code>manuals/mioXL_User_Manual.pdf</code></p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/mioXL--iconnectivity-mioxl-usb-midi-interface" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$399</div>
+          <div class="buy-condition">New &middot; in stock</div>
+        </a>
+        <a class="buy-card" href="https://reverb.com/p/iconnectivity-mioxl" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$300&ndash;380</div>
+          <div class="buy-condition">Used</div>
+        </a>
+        <a class="buy-card" href="https://www.iconnectivity.com/mioxl" target="_blank">
+          <div class="buy-source">iConnectivity</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Official product page</div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="item alt">
+    <div class="item-top">
+      <div class="item-body">
+        <div class="item-title">
+          <h3>Conductive Labs MRCC</h3>
+          <span class="badges"><span class="badge alt">Alternative</span></span>
+        </div>
+        <p>Front-panel configurable MIDI router. 4 USB-A host ports + 1 USB-B for computer + 4 DIN in / 4 DIN out + TRS A&amp;B. 128 routing presets. OLED display + button-per-port routing &mdash; no laptop needed to configure.</p>
+        <p class="notes">Better front-panel UX than mioXL (routing without software), but only 4 USB host ports &mdash; 3 short for Will's rig. 2U rack or desktop, 15.25" wide. Manual verified: <code>manuals/MRCC_User_Manual.pdf</code></p>
+        <p><span class="price">~$360&ndash;380 new</span></p>
+      </div>
+    </div>
+    <div class="buy-options">
+      <h4>Where to buy</h4>
+      <div class="buy-grid">
+        <a class="buy-card" href="https://www.sweetwater.com/store/detail/MRCC--conductive-labs-mrcc-midi-router-control-center" target="_blank">
+          <div class="buy-source">Sweetwater</div>
+          <div class="buy-price">$379</div>
+          <div class="buy-condition">New</div>
+        </a>
+        <a class="buy-card" href="https://reverb.com/marketplace?query=conductive%20labs%20mrcc" target="_blank">
+          <div class="buy-source">Reverb</div>
+          <div class="buy-price">~$280&ndash;350</div>
+          <div class="buy-condition">Used</div>
+        </a>
+        <a class="buy-card" href="https://conductivelabs.com/mrcc/" target="_blank">
+          <div class="buy-source">Conductive Labs</div>
+          <div class="buy-price">&mdash;</div>
+          <div class="buy-condition">Official product page</div>
         </a>
       </div>
     </div>
@@ -819,6 +902,15 @@
 
     <div class="accessory">
       <div class="accessory-info">
+        <h4>TRS-to-DIN MIDI Adapter Cables (Type A)</h4>
+        <p>Need 2 &mdash; one for Blackbox 2 MIDI In, one for MIDI Out. Converts 3.5 mm TRS to standard 5-pin DIN so the BB2 can sit in the dawless MIDI chain (Digi 2 &rarr; TD-3 &rarr; Tetra &rarr; BB2 &rarr; Minilogue &rarr; TR-8S). Type A is the standard used by Elektron, Korg, Arturia. BB2 input auto-detects A/B; set output to Type A in Global Settings.</p>
+        <p class="price">~$10&ndash;15 for a pair</p>
+        <a href="https://www.amazon.com/s?k=TRS+Type+A+MIDI+adapter+cable+3.5mm+to+DIN" target="_blank">Amazon</a>
+      </div>
+    </div>
+
+    <div class="accessory">
+      <div class="accessory-info">
         <h4>Vermona Rack Ears</h4>
         <p>Optional 19" rack ears for the Perfourmer MKII. Required if mounting it in the rack case.</p>
         <p class="price">~$30&ndash;50</p>
@@ -871,6 +963,7 @@
     <li>Korg Volca Bass (bass)</li>
     <li>Arturia Drumbrute (drums)</li>
     <li>DSI Tetra (poly synth)</li>
+    <li>1010music Blackbox 2 (sampler)</li>
     <li>Zoom V3 on FX send/return</li>
   </ul>
 
