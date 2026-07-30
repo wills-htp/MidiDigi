@@ -90,6 +90,17 @@ All gear manuals live in `manuals/`:
 - `manuals/mioXL_User_Manual.pdf` — iConnectivity mio X-Series user guide (26 pages, covers mioXL and mioXM)
 - `manuals/MRCC_User_Manual.pdf` — Conductive Labs MRCC user manual v1.1.020 (54 pages)
 
+### Sound design reference guides
+
+These guides inform FM patch design on the Digitone 2. Read them when translating
+a user's sound description into FM parameters.
+
+- `manuals/FM_Synthesis_Basics_EtherDiver.md` — Core FM programming reference: operators, ratios, modulation depth, feedback, envelope shaping, and a "sound idea → FM parameter" translation table
+- `manuals/FM_Synthesis_Patches_EDMProd.md` — Practical FM patch recipes (bass growl, frozen pad, lead) with design principles
+- `manuals/Basic_FM_Synthesis_DX7_MarkPhillips.pdf` — 30-page hands-on FM programming tutorial for the DX7 (4/6-op concepts transfer directly to Digitone 2)
+- `manuals/Drexciya_Electro_Sound_Design.md` — Detroit electro synthesis techniques, gear analysis, and Digitone 2 translation table (Drexciya, electro aesthetic)
+- `manuals/Aphex_Twin_SAW_Production.md` — Selected Ambient Works 85-92 production breakdown: FM pad techniques (DX7/DX100), effects processing, lo-fi aesthetic, and Digitone 2 translation table
+
 ## Preset designer
 
 `preset_designer.py` — natural language interface to the Digitone 2 over USB MIDI.

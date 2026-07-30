@@ -1,0 +1,40 @@
+{
+  "name": "Acid Bounce",
+  "machine": "fm_tone",
+  "filter": "comb_minus",
+  "track": 7,
+  "description": "Wild bouncy evolving patch. Comb filter + FM with 3 LFOs creating constant movement.",
+  "preset": {
+    "algo": 18, "ratio_a": 24, "ratio_b": 55,
+    "harm": 96, "dtun": 40, "fdbk": 70, "mix": 64,
+
+    "atk_a": 0, "dec_a": 80, "end_a": 20, "lev_a": 90,
+    "atk_b": 0, "dec_b": 50, "end_b": 10, "lev_b": 100,
+
+    "f_freq": 60, "f_fdbk": 85, "f_lpf": 80, "f_env": 96,
+    "f_atk": 0, "f_dec": 90, "f_sus": 0, "f_rel": 60,
+    "fltr_base": 10, "fltr_wdth": 100,
+
+    "amp_atk": 0, "amp_hold": 40, "amp_dec": 70,
+    "amp_pan": 64, "amp_vol": 100,
+
+    "fx_br": 127, "fx_over": 30, "fx_srr": 0,
+    "fx_del": 50, "fx_rev": 25, "fx_chr": 40,
+
+    "lfo1": {
+      "spd": 80, "mult": 8, "fade": 64,
+      "dest": "fltr_freq", "wave": "tri",
+      "sph": 0, "mode": "free", "depth": 60
+    },
+    "lfo2": {
+      "spd": 68, "mult": 8, "fade": 64,
+      "dest": "syn1e", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 35
+    },
+    "lfo3": {
+      "spd": 66, "mult": 8, "fade": 64,
+      "dest": "syn1g", "wave": "tri",
+      "sph": 0, "mode": "free", "depth": 50
+    }
+  }
+}
