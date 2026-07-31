@@ -1,0 +1,69 @@
+{
+  "name": "Awareness Pad",
+  "machine": "fm_tone",
+  "filter": "lowpass4",
+  "track": 7,
+  "description": "Warm pad lead inspired by Evan Baggs 'With Awareness'. Near-pure sine, 2s attack, 0.5 Hz phaser-like LFO sweep on filter. Key: G#min, centroid ~1100 Hz.",
+  "source_analysis": {
+    "file": "70s-evan-baggs-unknown-album_128.2bpm_G#min-other.wav",
+    "fundamental_hz": 319.6,
+    "note": "D#4",
+    "brightness": "warm",
+    "centroid_hz": 1108,
+    "harmonic_character": "odd harmonics dominant (very subtle, near-sine)",
+    "attack_ms": 2021,
+    "modulation_hz": 0.5,
+    "noise_ratio": 0.47
+  },
+  "preset": {
+    "algo": 3,
+    "ratio_a": 2,        "__ratio_a": "2:1 for subtle odd harmonics (matches analysis H3 peak)",
+    "ratio_b": 1,
+    "harm": 0,
+    "dtun": 10,           "__dtun": "slight detune for warmth",
+    "fdbk": 0,            "__fdbk": "zero — clean, no saw edge",
+    "mix": 0,             "__mix": "pure carrier",
+
+    "atk_a": 0, "dec_a": 110, "end_a": 80, "lev_a": 55,
+    "atk_b": 0, "dec_b": 110, "end_b": 40, "lev_b": 12,
+    "__operators": "low mod level (12) — just enough to add subtle odd harmonics",
+
+    "f_freq": 75,         "__f_freq": "warm cutoff matching ~1100 Hz centroid",
+    "f_reso": 25,         "__f_reso": "low — smooth, no screech",
+    "f_env": 15,          "__f_env": "minimal envelope — pad stays even",
+    "f_atk": 80,          "__f_atk": "slow filter open to match 2s amp attack",
+    "f_dec": 110,
+    "f_sus": 50,
+    "f_rel": 70,
+
+    "amp_atk": 100,       "__amp_atk": "~2 second fade in (analysis: 2021ms)",
+    "amp_hold": 127,
+    "amp_dec": 127,       "__amp_dec": "long sustain",
+    "amp_pan": 64,
+    "amp_vol": 100,
+
+    "fx_br": 0,
+    "fx_over": 0,
+    "fx_srr": 0,
+    "fx_del": 90,         "__fx_del": "delay for space (user preference over reverb)",
+    "fx_rev": 0,
+    "fx_chr": 65,         "__fx_chr": "chorus for phaser-like width/sweep",
+
+    "lfo1": {
+      "spd": 18,          "__spd": "~0.5 Hz to match detected modulation",
+      "mult": 0,
+      "fade": 64,
+      "dest": "fltr_freq",
+      "wave": "sine",
+      "sph": 0,
+      "mode": "free",
+      "depth": 45
+    },
+
+    "lfo2": {
+      "spd": 0, "mult": 0, "fade": 64,
+      "dest": "none", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 0
+    }
+  }
+}
