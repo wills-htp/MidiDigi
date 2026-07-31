@@ -11,7 +11,7 @@ Usage (CLI):
   python3 preset_designer.py send patch.json --track 7  # send a preset file
   python3 preset_designer.py analyze audio.wav          # analyze audio
   python3 preset_designer.py machines                   # list machines & params
-  python3 preset_designer.py read --track 3             # read current CC values (via request)
+  python3 preset_designer.py read --track 7 --machine fm_tone --filter lowpass4  # read CCs
 
 Primary usage is conversational — called by Claude to send patches.
 """
@@ -400,6 +400,181 @@ def tweak(changes, track=1, machine=None, fltr=None, port_name=DEFAULT_PORT):
     port.close()
     print(f"Tweaked {len(changes)} params on track {track}.")
     return True
+
+
+# ═══════════════════════════════════════════════════════════════════
+# READ — listen for CC output from the Digitone to capture current
+#         parameter values
+# ═══════════════════════════════════════════════════════════════════
+
+# Reverse lookup tables
+_REV_LFO_WAVE = {v: k for k, v in LFO_WAVE.items()}
+_REV_LFO_MODE = {v: k for k, v in LFO_MODE.items()}
+_REV_LFO_DEST = {v: k for k, v in LFO_DEST.items()}
+
+
+def read_track(track=1, machine=None, fltr=None, timeout=10, port_name=DEFAULT_PORT):
+    """Read current CC values from a Digitone 2 track.
+
+    Opens the MIDI input and collects CC messages on the track's channel.
+    Returns a dict of parameter names → values.
+
+    To trigger output, scroll through each parameter page (SYN, FLTR, AMP,
+    FX, MOD) on the Digitone 2 and wiggle each knob slightly — the Digitone
+    sends the CC value when a knob is moved.
+
+    Requires SETTINGS > MIDI CONFIG > PORT CONFIG:
+      ENCODER DEST = INT+EXT
+      OUTPUT TO    = USB  (or MIDI+USB)
+      PARAM OUTPUT = CC
+    """
+    channel = track - 1
+
+    # Build reverse map: CC number → knob key(s)
+    rev_cc = {}
+    for name, cc_num in CC.items():
+        rev_cc.setdefault(cc_num, []).append(name)
+
+    # Open input port
+    try:
+        port_in = mido.open_input(port_name)
+    except (IOError, OSError):
+        available = mido.get_input_names()
+        digi = [p for p in available if 'Digitone' in p]
+        if digi:
+            port_in = mido.open_input(digi[0])
+            print(f"Opened input: {digi[0]}")
+        else:
+            print(f"ERROR: No Digitone input port found. Available: {available}")
+            return None
+
+    print(f"Listening on track {track} (ch {channel + 1}) for {timeout}s...")
+    print("Scroll through SYN / FLTR / AMP / FX / MOD pages and wiggle knobs.")
+
+    raw = {}          # cc_key → value
+    nrpn_state = {}   # track NRPN assembly: 'msb', 'lsb'
+    lfo3_vals = {}    # lfo3 NRPN key → value
+    start = time.time()
+
+    while time.time() - start < timeout:
+        msg = port_in.receive(block=False)
+        if msg is None:
+            time.sleep(0.01)
+            continue
+
+        if msg.type != 'control_change' or msg.channel != channel:
+            continue
+
+        cc_num, val = msg.control, msg.value
+
+        # NRPN assembly (for LFO3)
+        if cc_num == 99:
+            nrpn_state['msb'] = val
+            continue
+        if cc_num == 98:
+            nrpn_state['lsb'] = val
+            continue
+        if cc_num == 6 and nrpn_state.get('msb') == 1:
+            lsb = nrpn_state.get('lsb')
+            if lsb is not None:
+                # Reverse lookup LFO3 NRPN
+                rev_nrpn = {v: k for k, v in LFO3_NRPN.items()}
+                nrpn_key = rev_nrpn.get(lsb, f'nrpn_1_{lsb}')
+                lfo3_vals[nrpn_key] = val
+            continue
+
+        # Regular CC
+        keys = rev_cc.get(cc_num, [f'cc{cc_num}'])
+        for k in keys:
+            raw[k] = val
+
+    port_in.close()
+
+    if not raw and not lfo3_vals:
+        print("\nNo data received.")
+        print("Check SETTINGS > MIDI CONFIG > PORT CONFIG:")
+        print("  ENCODER DEST = INT+EXT")
+        print("  OUTPUT TO    = USB or MIDI+USB")
+        print("  PARAM OUTPUT = CC")
+        return {}
+
+    # Build reverse machine/filter name maps
+    rev_machine = {}
+    if machine and machine in MACHINES:
+        rev_machine = {v: k for k, v in MACHINES[machine]['params'].items()}
+    rev_filter = {}
+    if fltr and fltr in FILTERS:
+        rev_filter = {v: k for k, v in FILTERS[fltr]['params'].items()}
+
+    # Classify and display
+    sections = {'SYN': [], 'FLTR': [], 'AMP': [], 'FX': [],
+                'LFO1': [], 'LFO2': [], 'LFO3': [], 'OTHER': []}
+    result = {}
+
+    for key, val in sorted(raw.items()):
+        friendly = rev_machine.get(key) or rev_filter.get(key)
+        if friendly and key in rev_filter:
+            friendly = f"f_{friendly}"
+
+        if key.startswith('syn'):
+            section = 'SYN'
+        elif key.startswith('fltr_'):
+            section = 'FLTR'
+        elif key.startswith('amp_'):
+            section = 'AMP'
+        elif key.startswith('fx_'):
+            section = 'FX'
+        elif key.startswith('lfo1_'):
+            section = 'LFO1'
+        elif key.startswith('lfo2_'):
+            section = 'LFO2'
+        else:
+            section = 'OTHER'
+
+        display = _format_param(key, val, friendly)
+        sections[section].append((display, val))
+        result[friendly or key] = val
+
+    # LFO3 (NRPN)
+    for key, val in sorted(lfo3_vals.items()):
+        display = _format_param(key, val, None)
+        sections['LFO3'].append((display, val))
+        result[key] = val
+
+    # Print
+    total = len(raw) + len(lfo3_vals)
+    print(f"\n{'═' * 55}")
+    print(f"  TRACK {track} — {total} parameters read")
+    if machine:
+        print(f"  Machine: {machine}  Filter: {fltr or '?'}")
+    print(f"{'═' * 55}")
+
+    for section, params in sections.items():
+        if not params:
+            continue
+        print(f"\n  ── {section} ──")
+        for display, val in params:
+            bar = '█' * (val * 20 // 127) if val <= 127 else ''
+            print(f"    {display:35s} {val:3d}  {bar}")
+
+    print(f"\n{'═' * 55}\n")
+    return result
+
+
+def _format_param(key, val, friendly):
+    """Format a param name with human-readable extras for LFO fields."""
+    base = f"{friendly} ({key})" if friendly else key
+
+    if key.endswith('_wave'):
+        wave_name = _REV_LFO_WAVE.get(val, '?')
+        return f"{base} [{wave_name}]"
+    if key.endswith('_mode'):
+        mode_name = _REV_LFO_MODE.get(val, '?')
+        return f"{base} [{mode_name}]"
+    if key.endswith('_dest'):
+        dest_name = _REV_LFO_DEST.get(val, '?')
+        return f"{base} [{dest_name}]"
+    return base
 
 
 # ═══════════════════════════════════════════════════════════════════
@@ -833,6 +1008,12 @@ def main():
     p_analyze.add_argument('file', help='WAV audio file')
     p_analyze.add_argument('--json', action='store_true', help='Output raw JSON')
 
+    p_read = sub.add_parser('read', help='Read current CC values from a track')
+    p_read.add_argument('--track', type=int, default=1, help='Track number (1-16)')
+    p_read.add_argument('--machine', default=None, help='SYN machine name')
+    p_read.add_argument('--filter', default=None, help='FLTR machine name')
+    p_read.add_argument('--timeout', type=int, default=10, help='Listen duration in seconds')
+
     args = parser.parse_args()
 
     if args.command == 'ports':
@@ -843,6 +1024,11 @@ def main():
         cmd_send(args)
     elif args.command == 'analyze':
         cmd_analyze(args)
+    elif args.command == 'read':
+        result = read_track(track=args.track, machine=args.machine,
+                            fltr=args.filter, timeout=args.timeout)
+        if result and '--json' in sys.argv:
+            print(json.dumps(result, indent=2))
     else:
         parser.print_help()
 
