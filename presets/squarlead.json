@@ -1,0 +1,67 @@
+{
+  "name": "Squarlead",
+  "machine": "fm_tone",
+  "filter": "legacy",
+  "track": 6,
+  "description": "Warm analog-style bending lead for F/E lines. Portamento glide, saw LFO on amp for 1/8-note breathing pump. Tune -2 set on unit.",
+  "preset": {
+    "algo": 6,
+    "ratio_a": 0,
+    "ratio_b": 1,
+    "harm": 46,
+    "dtun": 64,
+    "fdbk": 75,
+    "mix": 0,
+
+    "atk_a": 0, "dec_a": 127, "end_a": 110, "lev_a": 120,
+    "atk_b": 0, "dec_b": 100, "end_b": 40,  "lev_b": 30,
+
+    "f_freq": 60,
+    "f_reso": 55,
+    "f_env": 40,
+    "f_atk": 30,
+    "f_dec": 100,
+    "f_sus": 70,
+    "f_rel": 50,
+
+    "amp_atk": 18,
+    "amp_dec": 127,
+    "amp_sus": 120,
+    "amp_rel": 0,
+    "amp_vol": 120,
+
+    "fx_br": 0,
+    "fx_over": 15,
+    "fx_srr": 0,
+    "fx_del": 0,
+    "fx_rev": 0,
+    "fx_chr": 0,
+
+    "lfo1": {
+      "spd": 64,
+      "mult": 0,
+      "fade": 64,
+      "dest": "amp_vol",
+      "wave": "sine",
+      "sph": 0,
+      "mode": "free",
+      "depth": 127
+    },
+
+    "lfo2": {
+      "spd": -1,
+      "mult": 9,
+      "fade": 64,
+      "dest": "amp_vol",       "__dest": "rising saw on amp, 1/8 note pump",
+      "wave": "saw",
+      "sph": 122,
+      "mode": "trig",
+      "depth": 127
+    }
+  },
+  "portamento": {
+    "on": true,
+    "time": 35
+  },
+  "notes": "Tune -2 set on unit. LFO1 was experimental (sine breathing) — LFO2 is the main pump. User may have adjusted LFO1 on unit."
+}
