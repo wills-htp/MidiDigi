@@ -3,7 +3,7 @@
   "machine": "fm_tone",
   "filter": "legacy",
   "track": 16,
-  "description": "Mid-range lead inspired by Binh 'Booari' (My Own Jupiter MOJ 05). Saw-ish FM tone with half-measure filter envelope sweep. Chords: E+B fifth, shift to D#+A#+G. Bouncy amp attack/release.",
+  "description": "Mid-range lead inspired by Binh 'Booari' (My Own Jupiter MOJ 05). Filter envelope sweep, SRR + overdrive for lo-fi texture, subtle pitch drift via LFO3. Chords: E+B fifth, shift to D#+A#+G.",
   "source_analysis": {
     "file": "0s-binh-unknown-album_126.6bpm_A#min-other.wav",
     "fundamental_hz": 199.5,
@@ -18,7 +18,7 @@
     "chords": "E4+B4 (fifth), shifts to D#4+A#4+G4 (Eb major)"
   },
   "preset": {
-    "algo": 6,
+    "algo": 7,
     "ratio_a": 0,
     "ratio_b": 1,
     "harm": 43,
@@ -29,31 +29,32 @@
     "atk_a": 0, "dec_a": 127, "end_a": 120, "lev_a": 127,
     "atk_b": 0, "dec_b": 90,  "end_b": 50,  "lev_b": 55,
 
-    "f_freq": 50,
-    "f_reso": 78,
-    "f_env": 110,
-    "f_atk": 60,
+    "f_freq": 35,
+    "f_reso": 64,
+    "f_env": 55,
+    "f_atk": 30,
     "f_dec": 127,
-    "f_sus": 110,
+    "f_sus": 50,
     "f_rel": 0,
 
     "amp_atk": 17,
     "amp_dec": 127,
     "amp_sus": 127,
     "amp_rel": 18,
-    "amp_vol": 127,
+    "amp_vol": 120,
 
     "fx_br": 0,
-    "fx_over": 20,
-    "fx_srr": 0,
+    "fx_over": 22,
+    "fx_srr": 25,
+    "fx_srr_rt": 64,
     "fx_del": 0,
     "fx_rev": 0,
     "fx_chr": 0,
 
     "lfo1": {
       "spd": 0, "mult": 0, "fade": 64,
-      "dest": "none",
-      "wave": "tri", "sph": 0, "mode": "free", "depth": 0
+      "dest": "none", "wave": "tri",
+      "sph": 0, "mode": "free", "depth": 0
     },
 
     "lfo2": {
@@ -61,5 +62,10 @@
       "dest": "none", "wave": "sine",
       "sph": 0, "mode": "free", "depth": 0
     }
+  },
+  "lfo3_nrpn": {
+    "spd": 8, "mult": 0, "fade": 64,
+    "dest": "syn1a", "__dest": "subtle pitch drift",
+    "wave": "sine", "sph": 0, "mode": "free", "depth": 5
   }
 }
