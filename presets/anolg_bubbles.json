@@ -1,0 +1,53 @@
+{
+  "name": "Anolg Bubbles",
+  "machine": "fm_tone",
+  "filter": "lowpass4",
+  "track": 6,
+  "description": "Bright bubbly lead evolved from Blip Square Lead. High feedback (87) for aggressive saw, high filter freq with squelchy resonance, totally dry. Read back from Digitone 2 via SysEx.",
+  "preset": {
+    "algo": 2,
+    "ratio_a": 5,
+    "ratio_b": 4,
+    "harm": 0,
+    "dtun": 0,
+    "fdbk": 87,
+    "mix": 34,
+
+    "atk_a": 0, "dec_a": 0, "end_a": 0, "lev_a": 55,
+    "atk_b": 0, "dec_b": 40, "end_b": 38, "lev_b": 64,
+
+    "f_freq": 81,
+    "f_reso": 94,
+    "f_env": 55,
+    "f_atk": 0,
+    "f_dec": 35,
+    "f_sus": 20,
+    "f_rel": 15,
+
+    "amp_atk": 0,
+    "amp_dec": 60,
+    "amp_sus": 75,
+    "amp_rel": 12,
+    "amp_vol": 110,
+
+    "fx_br": 0,
+    "fx_over": 0,
+    "fx_srr": 4,
+    "fx_srr_rt": 64,
+    "fx_del": 0,
+    "fx_rev": 0,
+    "fx_chr": 0,
+
+    "lfo1": {
+      "spd": 0, "mult": 0, "fade": 64,
+      "dest": "none", "wave": "tri",
+      "sph": 0, "mode": "free", "depth": 0
+    },
+
+    "lfo2": {
+      "spd": 0, "mult": 0, "fade": 64,
+      "dest": "none", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 0
+    }
+  }
+}

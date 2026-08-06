@@ -578,6 +578,186 @@ def _format_param(key, val, friendly):
 
 
 # ═══════════════════════════════════════════════════════════════════
+# SYSEX PRESET READ — capture a preset sent from the Digitone 2
+#   Workflow: save sound to +DRIVE, go to PRESET/KIT → Manage →
+#   highlight the preset → [RIGHT] → SEND SYSEX. This function
+#   listens for the incoming SysEx message and decodes it.
+# ═══════════════════════════════════════════════════════════════════
+
+# Verified SysEx byte offsets (decoded payload) for FM Tone parameters.
+# Mapped by sending a test preset with known prime values and locating
+# each in the decoded SysEx dump. 37/37 parameters confirmed.
+SYSEX_MAP = {
+    'algo': 0x05E, 'ratio_a': 0x060, 'ratio_b': 0x062,
+    'mix': 0x068, 'dtun': 0x06A, 'fdbk': 0x06C,
+    'dec_a': 0x06E, 'end_a': 0x070, 'atk_a': 0x072, 'lev_a': 0x074,
+    'dec_b': 0x076, 'end_b': 0x078, 'atk_b': 0x07A, 'lev_b': 0x07C,
+    'adel': 0x07E, 'atrg': 0x08C, 'phrt': 0x08E, 'arst': 0x090,
+    'f_freq': 0x0B0, 'f_reso': 0x0B2, 'f_env': 0x0B4,
+    'f_atk': 0x0B8, 'f_dec': 0x0BA, 'f_sus': 0x0BC, 'f_rel': 0x0BE,
+    'amp_atk': 0x0CA, 'amp_dec': 0x0CE, 'amp_sus': 0x0D0, 'amp_rel': 0x0D2,
+    'fx_chr': 0x0D4, 'fx_del': 0x0D6, 'fx_rev': 0x0D8,
+    'amp_pan': 0x0DA, 'amp_vol': 0x0DC,
+    'fx_br': 0x0E6, 'fx_srr': 0x0E8, 'fx_over': 0x0EC,
+}
+
+# Name field in decoded payload
+SYSEX_NAME_OFFSET = 0x0C
+SYSEX_NAME_LENGTH = 16
+
+
+def _decode_7bit(data):
+    """Decode Elektron 7-bit SysEx encoding.
+
+    Every 8 SysEx bytes encode 7 raw bytes: first byte holds the MSBs
+    (bit 7 of each following byte), next 7 bytes hold bits 0-6.
+    """
+    result = bytearray()
+    for i in range(0, len(data), 8):
+        group = data[i:i + 8]
+        if len(group) < 2:
+            break
+        for j in range(1, len(group)):
+            msb = (group[0] >> (7 - j)) & 1
+            result.append(group[j] | (msb << 7))
+    return result
+
+
+def read_preset_sysex(timeout=30, port_name=DEFAULT_PORT):
+    """Listen for a SysEx preset dump from the Digitone 2 and decode it.
+
+    Returns a dict with 'name' and all mapped parameters, or None on timeout.
+
+    Usage:
+        1. Save the sound to +DRIVE on the Digitone 2
+        2. Call this function (it starts listening)
+        3. On the Digitone: PRESET/KIT → Manage → highlight preset →
+           press [RIGHT] → SEND SYSEX
+        4. Function returns the decoded preset dict
+    """
+    try:
+        port_in = mido.open_input(port_name)
+    except (IOError, OSError):
+        available = mido.get_input_names()
+        digi = [p for p in available if 'Digitone' in p]
+        if digi:
+            port_in = mido.open_input(digi[0])
+            print(f"Opened input: {digi[0]}")
+        else:
+            print(f"ERROR: No Digitone input port found. Available: {available}")
+            return None
+
+    print(f"Listening for SysEx preset dump ({timeout}s)...")
+    print("On the Digitone 2: PRESET/KIT [turquoise: PERFORM] → Manage →")
+    print("highlight your preset → press [RIGHT] → SEND SYSEX")
+
+    start = time.time()
+    sysex_msg = None
+
+    while time.time() - start < timeout:
+        msg = port_in.receive(block=False)
+        if msg is None:
+            time.sleep(0.01)
+            continue
+        if msg.type == 'sysex':
+            raw = msg.data
+            # Elektron manufacturer ID: 00 20 3C, device: 0x15 (Digitone 2)
+            if len(raw) > 9 and raw[0] == 0x00 and raw[1] == 0x20 and raw[2] == 0x3C:
+                msg_type = raw[5] if len(raw) > 5 else None
+                if msg_type == 0x53:  # sound preset
+                    sysex_msg = raw
+                    print(f"Received SysEx preset ({len(raw)} bytes)")
+                    break
+                else:
+                    print(f"  (received SysEx type 0x{msg_type:02X}, waiting for 0x53...)")
+
+    port_in.close()
+
+    if sysex_msg is None:
+        print("Timeout — no preset SysEx received.")
+        return None
+
+    # Decode the 7-bit encoded payload (starts after the 9-byte header)
+    encoded = sysex_msg[9:]
+    decoded = _decode_7bit(encoded)
+
+    # Extract name
+    name_bytes = decoded[SYSEX_NAME_OFFSET:SYSEX_NAME_OFFSET + SYSEX_NAME_LENGTH]
+    name = bytes(name_bytes).decode('ascii', errors='replace').rstrip('\x00').strip()
+
+    # Extract parameters
+    preset = {}
+    for param, offset in SYSEX_MAP.items():
+        if offset < len(decoded):
+            preset[param] = decoded[offset]
+
+    # Print summary
+    print(f"\n{'═' * 50}")
+    print(f"  PRESET: {name}")
+    print(f"  Decoded {len(decoded)} bytes, {len(preset)} params mapped")
+    print(f"{'═' * 50}")
+
+    for section_name, keys in [
+        ('SYN', ['algo', 'ratio_a', 'ratio_b', 'mix', 'dtun', 'fdbk']),
+        ('ENV A', ['atk_a', 'dec_a', 'end_a', 'lev_a']),
+        ('ENV B', ['atk_b', 'dec_b', 'end_b', 'lev_b']),
+        ('FLTR', ['f_freq', 'f_reso', 'f_env', 'f_atk', 'f_dec', 'f_sus', 'f_rel']),
+        ('AMP', ['amp_atk', 'amp_dec', 'amp_sus', 'amp_rel', 'amp_vol', 'amp_pan']),
+        ('FX', ['fx_br', 'fx_srr', 'fx_over', 'fx_chr', 'fx_del', 'fx_rev']),
+    ]:
+        vals = [f"{k}={preset.get(k, '?')}" for k in keys if k in preset]
+        if vals:
+            print(f"  {section_name:6s}: {', '.join(vals)}")
+
+    print(f"{'═' * 50}\n")
+
+    return {'name': name, 'preset': preset}
+
+
+def read_and_save_preset(filepath=None, timeout=30, port_name=DEFAULT_PORT,
+                         machine='fm_tone', fltr='lowpass4', track=None,
+                         description=''):
+    """Read a preset via SysEx and save it as a JSON file.
+
+    Combines read_preset_sysex() with JSON file writing. If no filepath
+    is given, saves to presets/<name_snake_case>.json.
+    """
+    result = read_preset_sysex(timeout=timeout, port_name=port_name)
+    if result is None:
+        return None
+
+    name = result['name']
+    preset = result['preset']
+
+    # Build the JSON structure matching existing preset format
+    output = {
+        'name': name,
+        'machine': machine,
+        'filter': fltr,
+    }
+    if track:
+        output['track'] = track
+    output['description'] = description or f'Read back from Digitone 2 via SysEx.'
+    output['preset'] = preset
+
+    # Default filepath
+    if filepath is None:
+        safe_name = name.lower().replace(' ', '_').replace('-', '_')
+        safe_name = ''.join(c for c in safe_name if c.isalnum() or c == '_')
+        filepath = Path('presets') / f'{safe_name}.json'
+
+    filepath = Path(filepath)
+    filepath.parent.mkdir(parents=True, exist_ok=True)
+
+    with open(filepath, 'w') as f:
+        json.dump(output, f, indent=2)
+        f.write('\n')
+
+    print(f"Saved to {filepath}")
+    return output
+
+
+# ═══════════════════════════════════════════════════════════════════
 # LIVE CONTROL — mute, pattern change, track level
 # ═══════════════════════════════════════════════════════════════════
 
@@ -1014,6 +1194,14 @@ def main():
     p_read.add_argument('--filter', default=None, help='FLTR machine name')
     p_read.add_argument('--timeout', type=int, default=10, help='Listen duration in seconds')
 
+    p_readsysex = sub.add_parser('readsysex', help='Read preset via SysEx dump from Digitone 2')
+    p_readsysex.add_argument('--timeout', type=int, default=30, help='Listen duration in seconds')
+    p_readsysex.add_argument('--save', action='store_true', help='Save to presets/ as JSON')
+    p_readsysex.add_argument('--track', type=int, default=None, help='Track number for JSON')
+    p_readsysex.add_argument('--machine', default='fm_tone', help='Machine type for JSON')
+    p_readsysex.add_argument('--filter', default='lowpass4', help='Filter type for JSON')
+    p_readsysex.add_argument('--out', default=None, help='Output JSON filepath')
+
     args = parser.parse_args()
 
     if args.command == 'ports':
@@ -1029,6 +1217,15 @@ def main():
                             fltr=args.filter, timeout=args.timeout)
         if result and '--json' in sys.argv:
             print(json.dumps(result, indent=2))
+    elif args.command == 'readsysex':
+        if args.save or args.out:
+            read_and_save_preset(
+                filepath=args.out, timeout=args.timeout,
+                machine=args.machine, fltr=args.filter, track=args.track)
+        else:
+            result = read_preset_sysex(timeout=args.timeout)
+            if result:
+                print(json.dumps(result, indent=2))
     else:
         parser.print_help()
 

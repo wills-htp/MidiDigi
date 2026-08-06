@@ -1,0 +1,53 @@
+{
+  "name": "Evan Baggs Drift Pad",
+  "machine": "fm_tone",
+  "filter": "lowpass4",
+  "track": 8,
+  "description": "Murky drifting pad inspired by Evan Baggs 'Unknown Album' other stem. Odd harmonics, warm/dark (centroid 1108Hz), very slow 2s attack, noisy/textural (47% noise), 0.5Hz drift. Subtractive FM: ratio 16:16, feedback 30, LP4 dark with slow envelope, SRR+BR for lo-fi grit, delay only.",
+  "preset": {
+    "algo": 1,
+    "ratio_a": 16,
+    "ratio_b": 16,
+    "harm": 3,
+    "dtun": 6,
+    "fdbk": 30,
+    "mix": 14,
+
+    "atk_a": 0, "dec_a": 60, "end_a": 45, "lev_a": 35,
+    "atk_b": 0, "dec_b": 70, "end_b": 30, "lev_b": 20,
+
+    "f_freq": 42,
+    "f_reso": 55,
+    "f_env": 45,
+    "f_atk": 75,
+    "f_dec": 55,
+    "f_sus": 60,
+    "f_rel": 35,
+
+    "amp_atk": 95,
+    "amp_dec": 80,
+    "amp_sus": 90,
+    "amp_rel": 45,
+    "amp_vol": 100,
+
+    "fx_br": 18,
+    "fx_over": 12,
+    "fx_srr": 30,
+    "fx_srr_rt": 64,
+    "fx_del": 45,
+    "fx_rev": 0,
+    "fx_chr": 0,
+
+    "lfo1": {
+      "spd": 10, "mult": 0, "fade": 64,
+      "dest": "fltr_freq", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 15
+    },
+
+    "lfo2": {
+      "spd": 4, "mult": 0, "fade": 64,
+      "dest": "syn1e", "wave": "tri",
+      "sph": 0, "mode": "free", "depth": 4
+    }
+  }
+}

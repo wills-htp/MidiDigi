@@ -1,0 +1,53 @@
+{
+  "name": "Blip Square Lead",
+  "machine": "fm_tone",
+  "filter": "lowpass4",
+  "track": 6,
+  "description": "Analog-sounding blippy square lead. Subtractive FM method: ratio 2:1 for square (odd harmonics), feedback 28 for body, LP4 filter with snappy envelope for the blip. Detune + SRR for warmth and grit.",
+  "preset": {
+    "algo": 1,
+    "ratio_a": 2,
+    "ratio_b": 0,
+    "harm": 5,
+    "dtun": 6,
+    "fdbk": 28,
+    "mix": 0,
+
+    "atk_a": 0, "dec_a": 55, "end_a": 40, "lev_a": 38,
+    "atk_b": 0, "dec_b": 64, "end_b": 0,  "lev_b": 0,
+
+    "f_freq": 38,
+    "f_reso": 70,
+    "f_env": 72,
+    "f_atk": 0,
+    "f_dec": 45,
+    "f_sus": 20,
+    "f_rel": 15,
+
+    "amp_atk": 0,
+    "amp_dec": 60,
+    "amp_sus": 75,
+    "amp_rel": 12,
+    "amp_vol": 110,
+
+    "fx_br": 0,
+    "fx_over": 15,
+    "fx_srr": 12,
+    "fx_srr_rt": 64,
+    "fx_del": 50,
+    "fx_rev": 0,
+    "fx_chr": 0,
+
+    "lfo1": {
+      "spd": 5, "mult": 0, "fade": 64,
+      "dest": "syn1a", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 3
+    },
+
+    "lfo2": {
+      "spd": 0, "mult": 0, "fade": 64,
+      "dest": "none", "wave": "sine",
+      "sph": 0, "mode": "free", "depth": 0
+    }
+  }
+}

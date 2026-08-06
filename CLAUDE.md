@@ -95,6 +95,7 @@ All gear manuals live in `manuals/`:
 These guides inform FM patch design on the Digitone 2. Read them when translating
 a user's sound description into FM parameters.
 
+- `manuals/Digitone2_Analog_Sound_Design.md` — **Primary patch design reference**: how to make FM sound analog using the "Subtractive FM" method (feedback saws → LP4 filter → detune). Waveform recipes, filter techniques, patch frameworks for bass/pad/lead/acid, common mistakes. Consult this FIRST for every patch.
 - `manuals/FM_Synthesis_Basics_EtherDiver.md` — Core FM programming reference: operators, ratios, modulation depth, feedback, envelope shaping, and a "sound idea → FM parameter" translation table
 - `manuals/FM_Synthesis_Patches_EDMProd.md` — Practical FM patch recipes (bass growl, frozen pad, lead) with design principles
 - `manuals/Basic_FM_Synthesis_DX7_MarkPhillips.pdf` — 30-page hands-on FM programming tutorial for the DX7 (4/6-op concepts transfer directly to Digitone 2)
